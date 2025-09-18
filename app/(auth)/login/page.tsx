@@ -14,7 +14,7 @@ export default function LoginPage() {
     const checkSession = async () => {
       const session = await getSession()
       if (session) {
-        router.push('/')
+        router.push('/dashboard')
       }
     }
     checkSession()
@@ -26,12 +26,14 @@ export default function LoginPage() {
       setError(null)
 
       const result = await signIn('github', {
-        callbackUrl: '/',
+        callbackUrl: '/dashboard',
         redirect: false,
       })
 
       if (result?.error) {
         setError('Failed to sign in with GitHub. Please try again.')
+      } else if (result?.ok) {
+        router.push('/dashboard')
       }
     } catch {
       setError('An unexpected error occurred. Please try again.')
