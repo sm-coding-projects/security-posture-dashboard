@@ -3,6 +3,8 @@ import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/lib/auth/config";
 import { prisma } from "@/lib/db/prisma";
 
+export const dynamic = 'force-dynamic';
+
 interface RouteParams {
   params: {
     id: string;
