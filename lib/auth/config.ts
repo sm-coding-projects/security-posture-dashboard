@@ -69,7 +69,7 @@ export const authOptions: NextAuthOptions = {
           })
 
           if (!existingUser) {
-            await prisma.user.create({
+            const newUser = await prisma.user.create({
               data: {
                 email: user.email!,
                 name: user.name,
@@ -82,7 +82,7 @@ export const authOptions: NextAuthOptions = {
 
             await prisma.creditTransaction.create({
               data: {
-                userId: user.id,
+                userId: newUser.id,
                 amount: 100,
                 type: TransactionType.ADD,
                 description: "Initial signup bonus",
