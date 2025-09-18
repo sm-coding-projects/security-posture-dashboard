@@ -27,17 +27,11 @@ export default function LoginPage() {
 
       const result = await signIn('github', {
         callbackUrl: '/dashboard',
-        redirect: false,
+        redirect: true, // Changed to true for proper OAuth flow
       })
-
-      if (result?.error) {
-        setError('Failed to sign in with GitHub. Please try again.')
-      } else if (result?.ok) {
-        router.push('/dashboard')
-      }
-    } catch {
+    } catch (error) {
+      console.error('Sign in error:', error)
       setError('An unexpected error occurred. Please try again.')
-    } finally {
       setIsLoading(false)
     }
   }
