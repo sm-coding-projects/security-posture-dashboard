@@ -55,7 +55,7 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
   session: {
-    strategy: "database",
+    strategy: "jwt",
     maxAge: 30 * 24 * 60 * 60, // 30 days
   },
   pages: {
@@ -101,10 +101,19 @@ export const authOptions: NextAuthOptions = {
 
       return true
     },
-    async session({ session, user }) {
-      if (session.user) {
+    async jwt({ token, user, trigger }) {
+      // Initial sign in
+      if (user) {
+        token.id = user.id
+        token.email = user.email
+        token.name = user.name
+        token.image = user.image
+      }
+
+      // Always fetch fresh user data from database
+      if (token.email) {
         const dbUser = await prisma.user.findUnique({
-          where: { id: user.id },
+          where: { email: token.email },
           select: {
             id: true,
             name: true,
@@ -116,15 +125,25 @@ export const authOptions: NextAuthOptions = {
         })
 
         if (dbUser) {
-          session.user = {
-            id: dbUser.id,
-            name: dbUser.name,
-            email: dbUser.email,
-            image: dbUser.image,
-            credits: dbUser.credits,
-            tier: dbUser.tier,
-          }
+          token.id = dbUser.id
+          token.name = dbUser.name
+          token.email = dbUser.email
+          token.image = dbUser.image
+          token.credits = dbUser.credits
+          token.tier = dbUser.tier
         }
+      }
+
+      return token
+    },
+    async session({ session, token }) {
+      if (token && session.user) {
+        session.user.id = token.id as string
+        session.user.name = token.name as string | null
+        session.user.email = token.email as string | null
+        session.user.image = token.image as string | null
+        session.user.credits = token.credits as number
+        session.user.tier = token.tier as UserTier
       }
 
       return session
