@@ -25,6 +25,13 @@ const SCAN_TYPES = {
     credits: 3,
     duration: '~5 minutes',
     features: ['Everything in Basic', 'Port Scanning', 'Vulnerability Assessment', 'Email Security Analysis', 'DNSSEC Validation']
+  },
+  [ScanType.CUSTOM]: {
+    name: 'Custom Scan',
+    description: 'Customizable scan with specific modules',
+    credits: 2,
+    duration: '~3 minutes',
+    features: ['Custom Module Selection', 'Targeted Analysis', 'Flexible Configuration']
   }
 }
 

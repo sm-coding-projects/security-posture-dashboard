@@ -57,18 +57,8 @@ export default function ScanResultsPage({}: ScanResultsPageProps) {
       const scanData: Scan = await response.json()
       setScan(scanData)
       setError(null)
-
-      // Stop polling if scan is completed or failed
-      if (scanData.status === ScanStatus.COMPLETED ||
-          scanData.status === ScanStatus.FAILED ||
-          scanData.status === ScanStatus.CANCELLED) {
-        return false // Signal to stop polling
-      }
-
-      return true // Continue polling
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An error occurred')
-      return false // Stop polling on error
     } finally {
       setLoading(false)
     }

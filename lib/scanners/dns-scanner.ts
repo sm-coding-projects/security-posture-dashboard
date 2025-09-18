@@ -110,12 +110,12 @@ export class DNSScanner {
     // Query CAA records
     try {
       const caaRecords = await resolveCaa(domain);
-      caaRecords.forEach(caa => {
+      caaRecords.forEach((caa: any) => {
         records.push({
           type: 'CAA',
-          value: caa.value,
-          flags: caa.critical,
-          tag: caa.issue || caa.issuewild || caa.iodef
+          value: String(caa),
+          flags: caa.critical || 0,
+          tag: caa.issue || caa.issuewild || caa.iodef || 'unknown'
         });
       });
     } catch (error) {
@@ -166,7 +166,7 @@ export class DNSScanner {
           if (err) {
             resolve(false);
           } else {
-            resolve(records && records.length > 0);
+            resolve(records && Array.isArray(records) && records.length > 0);
           }
         });
       });

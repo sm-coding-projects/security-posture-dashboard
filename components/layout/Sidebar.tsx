@@ -17,6 +17,8 @@ import {
 
 interface SidebarProps {
   className?: string
+  isOpen?: boolean
+  onClose?: () => void
 }
 
 interface NavItem {
@@ -63,7 +65,7 @@ const navigation: NavItem[] = [
   },
 ]
 
-export function Sidebar({ className }: SidebarProps) {
+export function Sidebar({ className, isOpen, onClose }: SidebarProps) {
   const pathname = usePathname()
 
   return (
