@@ -19,8 +19,10 @@ import {
   Check,
   ChevronDown
 } from 'lucide-react'
+import { getSession } from '@/lib/auth/helpers'
 
-export default function LandingPage() {
+export default async function LandingPage() {
+  const session = await getSession()
   return (
     <div className="min-h-screen bg-background">
       {/* Navigation */}
@@ -32,12 +34,25 @@ export default function LandingPage() {
               <span className="ml-2 text-xl font-bold">SecurePosture</span>
             </div>
             <div className="flex items-center space-x-4">
-              <Link href="/login">
-                <Button variant="ghost">Sign In</Button>
-              </Link>
-              <Link href="/login">
-                <Button>Get Started</Button>
-              </Link>
+              {session ? (
+                <>
+                  <Link href="/dashboard">
+                    <Button variant="ghost">Dashboard</Button>
+                  </Link>
+                  <Link href="/settings">
+                    <Button>Settings</Button>
+                  </Link>
+                </>
+              ) : (
+                <>
+                  <Link href="/login">
+                    <Button variant="ghost">Sign In</Button>
+                  </Link>
+                  <Link href="/login">
+                    <Button>Get Started</Button>
+                  </Link>
+                </>
+              )}
             </div>
           </div>
         </div>
@@ -60,16 +75,35 @@ export default function LandingPage() {
               All in one powerful dashboard.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <Link href="/login">
-                <Button size="lg" className="w-full sm:w-auto">
-                  Start Free Scan
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Button>
-              </Link>
-              <Button variant="outline" size="lg" className="w-full sm:w-auto">
-                View Demo
-                <Eye className="ml-2 h-4 w-4" />
-              </Button>
+              {session ? (
+                <>
+                  <Link href="/dashboard">
+                    <Button size="lg" className="w-full sm:w-auto">
+                      Go to Dashboard
+                      <ArrowRight className="ml-2 h-4 w-4" />
+                    </Button>
+                  </Link>
+                  <Link href="/scan">
+                    <Button variant="outline" size="lg" className="w-full sm:w-auto">
+                      Start New Scan
+                      <Search className="ml-2 h-4 w-4" />
+                    </Button>
+                  </Link>
+                </>
+              ) : (
+                <>
+                  <Link href="/login">
+                    <Button size="lg" className="w-full sm:w-auto">
+                      Start Free Scan
+                      <ArrowRight className="ml-2 h-4 w-4" />
+                    </Button>
+                  </Link>
+                  <Button variant="outline" size="lg" className="w-full sm:w-auto">
+                    View Demo
+                    <Eye className="ml-2 h-4 w-4" />
+                  </Button>
+                </>
+              )}
             </div>
             <p className="text-sm text-muted-foreground mt-4">
               No credit card required • 5 free scans included
@@ -477,16 +511,35 @@ export default function LandingPage() {
             Join thousands of developers and security professionals who trust SecurePosture
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/login">
-              <Button size="lg" className="w-full sm:w-auto">
-                Start Your Free Scan
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
-            </Link>
-            <Button variant="outline" size="lg" className="w-full sm:w-auto">
-              Schedule Demo
-              <Users className="ml-2 h-4 w-4" />
-            </Button>
+            {session ? (
+              <>
+                <Link href="/dashboard">
+                  <Button size="lg" className="w-full sm:w-auto">
+                    Go to Dashboard
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Button>
+                </Link>
+                <Link href="/scan">
+                  <Button variant="outline" size="lg" className="w-full sm:w-auto">
+                    Start New Scan
+                    <Search className="ml-2 h-4 w-4" />
+                  </Button>
+                </Link>
+              </>
+            ) : (
+              <>
+                <Link href="/login">
+                  <Button size="lg" className="w-full sm:w-auto">
+                    Start Your Free Scan
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Button>
+                </Link>
+                <Button variant="outline" size="lg" className="w-full sm:w-auto">
+                  Schedule Demo
+                  <Users className="ml-2 h-4 w-4" />
+                </Button>
+              </>
+            )}
           </div>
         </div>
       </section>

@@ -3,7 +3,14 @@ import { NextResponse } from "next/server"
 
 export default withAuth(
   function middleware(req) {
-    // Middleware function runs after authentication
+    const token = req.nextauth.token
+    const { pathname } = req.nextUrl
+
+    // If user is authenticated and trying to access login page, redirect to dashboard
+    if (token && pathname === '/login') {
+      return NextResponse.redirect(new URL('/dashboard', req.url))
+    }
+
     return NextResponse.next()
   },
   {
@@ -21,8 +28,16 @@ export default withAuth(
           return true
         }
 
-        // Require authentication for dashboard and other API routes
-        if (pathname.startsWith('/dashboard') || pathname.startsWith('/api')) {
+        // Require authentication for dashboard and other protected routes
+        if (pathname.startsWith('/dashboard') ||
+            pathname.startsWith('/scan') ||
+            pathname.startsWith('/scans') ||
+            pathname.startsWith('/settings')) {
+          return !!token
+        }
+
+        // Require authentication for protected API routes
+        if (pathname.startsWith('/api') && !pathname.startsWith('/api/auth')) {
           return !!token
         }
 
