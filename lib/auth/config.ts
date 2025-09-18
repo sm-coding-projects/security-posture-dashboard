@@ -40,6 +40,7 @@ export const authOptions: NextAuthOptions = {
     GitHubProvider({
       clientId: process.env.GITHUB_CLIENT_ID!,
       clientSecret: process.env.GITHUB_CLIENT_SECRET!,
+      allowDangerousEmailAccountLinking: true,
       profile(profile: Record<string, unknown>) {
         return {
           id: String(profile.id),
