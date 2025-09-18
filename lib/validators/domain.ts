@@ -30,9 +30,7 @@ export const domainSchema = z
 
 export const scanRequestSchema = z.object({
   domain: domainSchema,
-  scanType: z.enum(['vulnerability', 'ssl', 'dns', 'port'], {
-    errorMap: () => ({ message: 'Please select a valid scan type' }),
-  }).optional().default('vulnerability'),
+  scanType: z.enum(['vulnerability', 'ssl', 'dns', 'port']).optional().default('vulnerability'),
 });
 
 export type ScanRequest = z.infer<typeof scanRequestSchema>;

@@ -128,7 +128,7 @@ export default function DashboardPage() {
     const statusConfig = {
       PENDING: { variant: 'secondary' as const, text: 'Pending' },
       RUNNING: { variant: 'default' as const, text: 'Running' },
-      COMPLETED: { variant: 'success' as const, text: 'Completed' },
+      COMPLETED: { variant: 'default' as const, text: 'Completed' },
       FAILED: { variant: 'destructive' as const, text: 'Failed' },
       CANCELLED: { variant: 'secondary' as const, text: 'Cancelled' }
     }

@@ -113,12 +113,12 @@ export class ScanOrchestrator {
       // 9. Store results in database using updateScan
       await updateScan(scanId, {
         status: ScanStatus.COMPLETED,
-        sslGrade,
+        sslGrade: sslGrade || undefined,
         securityScore,
-        sslDetails: scanResult.ssl,
-        headerDetails: scanResult.headers,
-        dnsDetails: scanResult.dns,
-        vulnerabilities: scanResult.ssl.vulnerabilities || []
+        sslDetails: scanResult.ssl as unknown as Record<string, unknown>,
+        headerDetails: scanResult.headers as unknown as Record<string, unknown>,
+        dnsDetails: scanResult.dns as unknown as Record<string, unknown>,
+        vulnerabilities: (scanResult.ssl.vulnerabilities || []) as unknown as Record<string, unknown>
       });
 
       console.log(`Scan ${scanId} completed successfully with score: ${securityScore}`);
