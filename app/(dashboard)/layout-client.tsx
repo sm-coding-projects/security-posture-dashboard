@@ -5,7 +5,6 @@ import { Session } from 'next-auth'
 import { SessionProvider } from 'next-auth/react'
 import { TopBar } from '@/components/layout/TopBar'
 import { Sidebar } from '@/components/layout/Sidebar'
-import { cn } from '@/lib/utils'
 
 interface DashboardLayoutClientProps {
   children: React.ReactNode
@@ -57,10 +56,7 @@ export function DashboardLayoutClient({ children, session }: DashboardLayoutClie
           />
 
           {/* Main Content Area */}
-          <div className={cn(
-            "flex-1 flex flex-col overflow-hidden transition-all duration-200",
-            !isMobile && sidebarCollapsed ? "ml-16" : !isMobile ? "ml-64" : "ml-0"
-          )}>
+          <div className="flex-1 flex flex-col overflow-hidden">
             <TopBar onMenuClick={handleMenuClick} />
 
             {/* Main Content */}
