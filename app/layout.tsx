@@ -1,5 +1,5 @@
 import { Inter } from 'next/font/google'
-import { SessionProvider } from 'next-auth/react'
+import SessionProvider from '@/components/auth/SessionProvider'
 import type { Metadata } from 'next'
 import './globals.css'
 
