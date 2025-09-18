@@ -5,6 +5,7 @@ import { Session } from 'next-auth'
 import { SessionProvider } from 'next-auth/react'
 import { TopBar } from '@/components/layout/TopBar'
 import { Sidebar } from '@/components/layout/Sidebar'
+import { cn } from '@/lib/utils'
 
 interface DashboardLayoutClientProps {
   children: React.ReactNode
@@ -13,12 +14,14 @@ interface DashboardLayoutClientProps {
 
 export function DashboardLayoutClient({ children, session }: DashboardLayoutClientProps) {
   const [sidebarOpen, setSidebarOpen] = useState(false)
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
 
   useEffect(() => {
     const checkScreenSize = () => {
-      setIsMobile(window.innerWidth < 768)
-      if (window.innerWidth >= 768) {
+      const mobile = window.innerWidth < 768
+      setIsMobile(mobile)
+      if (mobile) {
         setSidebarOpen(false)
       }
     }
@@ -37,42 +40,32 @@ export function DashboardLayoutClient({ children, session }: DashboardLayoutClie
     setSidebarOpen(false)
   }
 
+  const handleToggleCollapse = () => {
+    setSidebarCollapsed(!sidebarCollapsed)
+  }
+
   return (
     <SessionProvider session={session}>
       <div className="min-h-screen bg-gray-50">
-        {/* Desktop Layout */}
-        <div className="hidden md:flex h-screen">
-          {/* Desktop Sidebar */}
-          <Sidebar className="w-64 flex-shrink-0" />
+        <div className="flex h-screen">
+          {/* Unified Sidebar for both mobile and desktop */}
+          <Sidebar
+            isOpen={sidebarOpen}
+            onClose={handleSidebarClose}
+            collapsed={sidebarCollapsed}
+            onToggleCollapse={handleToggleCollapse}
+          />
 
           {/* Main Content Area */}
-          <div className="flex-1 flex flex-col overflow-hidden">
+          <div className={cn(
+            "flex-1 flex flex-col overflow-hidden transition-all duration-200",
+            !isMobile && sidebarCollapsed ? "ml-16" : !isMobile ? "ml-64" : "ml-0"
+          )}>
             <TopBar onMenuClick={handleMenuClick} />
 
             {/* Main Content */}
             <main className="flex-1 overflow-x-hidden overflow-y-auto">
-              <div className="container mx-auto px-6 py-8">
-                {children}
-              </div>
-            </main>
-          </div>
-        </div>
-
-        {/* Mobile Layout */}
-        <div className="md:hidden">
-          {/* Mobile Sidebar */}
-          <Sidebar
-            isOpen={sidebarOpen}
-            onClose={handleSidebarClose}
-          />
-
-          {/* Mobile Content */}
-          <div className="flex flex-col min-h-screen">
-            <TopBar onMenuClick={handleMenuClick} />
-
-            {/* Main Content */}
-            <main className="flex-1">
-              <div className="container mx-auto px-4 py-6">
+              <div className="container mx-auto px-4 md:px-6 py-6 md:py-8">
                 {children}
               </div>
             </main>
