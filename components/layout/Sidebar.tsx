@@ -110,8 +110,8 @@ export function Sidebar({ className, isOpen = false, onClose, collapsed = false,
               </div>
               {!collapsed && (
                 <div>
-                  <span className="font-black text-xl gradient-text">SecDash</span>
-                  <p className="text-xs text-muted-foreground">Security Suite</p>
+                  <span className="font-black text-xl gradient-text">SecureGuard</span>
+                  <p className="text-xs text-muted-foreground">Security Platform</p>
                 </div>
               )}
             </div>

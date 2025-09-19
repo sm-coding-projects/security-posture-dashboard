@@ -58,8 +58,8 @@ export function TopBar({ onMenuClick }: TopBarProps) {
               <Shield className="h-4 w-4 text-white" />
             </div>
             <div className="hidden sm:block">
-              <h1 className="text-xl font-black gradient-text">SecDash</h1>
-              <p className="text-xs text-muted-foreground -mt-1">Security Suite</p>
+              <h1 className="text-xl font-black gradient-text">SecureGuard</h1>
+              <p className="text-xs text-muted-foreground -mt-1">Security Platform</p>
             </div>
           </div>
         </div>
