@@ -1,11 +1,7 @@
-'use client'
-
 import Link from 'next/link'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Progress } from '@/components/ui/progress'
-import { Button } from '@/components/ui/button'
-import { signOut } from 'next-auth/react'
 import {
   Shield,
   TrendingUp,
@@ -14,36 +10,12 @@ import {
   Clock,
   Activity,
   Scan,
-  CreditCard,
-  LogOut
+  CreditCard
 } from 'lucide-react'
 
 export default function DashboardPage() {
-  const handleTestSignOut = async () => {
-    try {
-      console.log('Test sign out clicked')
-      await signOut({
-        callbackUrl: '/login',
-        redirect: true
-      })
-    } catch (error) {
-      console.error('Test sign out error:', error)
-      window.location.href = '/login'
-    }
-  }
-
   return (
     <div className="space-y-8 p-6 particle-field cyber-grid">
-      {/* Test Sign Out Button */}
-      <div className="fixed top-4 right-4 z-50">
-        <Button
-          onClick={handleTestSignOut}
-          className="neon-box bg-gradient-to-r from-red-600 to-orange-600 hover:from-red-500 hover:to-orange-500 text-white font-bold px-4 py-2 rounded-xl shadow-lg hover:scale-105 transition-all duration-300"
-        >
-          <LogOut className="h-4 w-4 mr-2" />
-          TEST SIGN OUT
-        </Button>
-      </div>
 
       <div className="relative scene-3d">
         <div className="absolute -top-4 -left-4 w-72 h-72 bg-gradient-to-r from-purple-400/10 to-cyan-400/10 rounded-full blur-3xl floating-animation"></div>
