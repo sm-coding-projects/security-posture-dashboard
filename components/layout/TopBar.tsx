@@ -113,9 +113,8 @@ export function TopBar({ onMenuClick }: TopBarProps) {
 
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button
-                variant="ghost"
-                className="relative h-10 w-10 rounded-2xl ring-2 ring-purple-500/20 hover:ring-purple-500/40 transition-all duration-200"
+              <button
+                className="relative h-10 w-10 rounded-2xl ring-2 ring-purple-500/20 hover:ring-purple-500/40 transition-all duration-200 bg-transparent border-0"
                 onClick={() => console.log('Avatar clicked!')}
               >
                 <Avatar className="h-10 w-10">
@@ -124,9 +123,9 @@ export function TopBar({ onMenuClick }: TopBarProps) {
                     {userInitials}
                   </AvatarFallback>
                 </Avatar>
-              </Button>
+              </button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent className="w-64 glass-card border-muted/20 shadow-xl" align="end">
+            <DropdownMenuContent className="w-64 bg-white border border-gray-200 rounded-md shadow-lg" align="end">
               <DropdownMenuLabel className="font-normal p-4">
                 <div className="flex flex-col space-y-2">
                   <p className="text-sm font-bold leading-none">
@@ -175,14 +174,10 @@ export function TopBar({ onMenuClick }: TopBarProps) {
               <DropdownMenuSeparator className="bg-muted/20" />
               <DropdownMenuItem
                 onClick={handleSignOut}
-                className="mx-2 rounded-xl hover:bg-red-500/10 transition-all duration-200 text-red-500 cursor-pointer"
+                className="text-red-600 hover:bg-red-50 cursor-pointer"
               >
-                <div className="flex items-center gap-3 p-3 w-full">
-                  <div className="p-1.5 rounded-lg bg-red-500/20">
-                    <LogOut className="h-4 w-4 text-red-500" />
-                  </div>
-                  <span className="font-bold">SIGN OUT</span>
-                </div>
+                <LogOut className="h-4 w-4 mr-2" />
+                SIGN OUT
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
