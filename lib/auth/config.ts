@@ -61,6 +61,12 @@ export const authOptions: NextAuthOptions = {
   pages: {
     signIn: "/login",
     signOut: "/login",
+    error: "/login",
+  },
+  events: {
+    async signOut() {
+      console.log("User signed out successfully")
+    },
   },
   callbacks: {
     async signIn({ user, account, profile }) {

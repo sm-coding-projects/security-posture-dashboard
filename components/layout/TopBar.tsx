@@ -42,14 +42,39 @@ export function TopBar({ onMenuClick }: TopBarProps) {
 
   const handleSignOut = async () => {
     try {
-      await signOut({
+      console.log('Starting sign out process...')
+
+      // First attempt with NextAuth signOut
+      const result = await signOut({
         callbackUrl: '/login',
-        redirect: true
+        redirect: false // Don't auto-redirect, we'll handle it manually
       })
+
+      console.log('SignOut result:', result)
+
+      // Clear any local storage or session storage
+      if (typeof window !== 'undefined') {
+        localStorage.clear()
+        sessionStorage.clear()
+      }
+
+      // Force redirect to login
+      window.location.href = '/login'
+
     } catch (error) {
       console.error('Sign out error:', error)
-      // Fallback redirect in case of error
-      window.location.href = '/login'
+
+      // Aggressive fallback: clear everything and redirect
+      if (typeof window !== 'undefined') {
+        localStorage.clear()
+        sessionStorage.clear()
+        document.cookie.split(";").forEach((c) => {
+          const eqPos = c.indexOf("=")
+          const name = eqPos > -1 ? c.substr(0, eqPos) : c
+          document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/"
+        })
+        window.location.href = '/login'
+      }
     }
   }
 
