@@ -101,20 +101,20 @@ export function Sidebar({ className, isOpen = false, onClose, collapsed = false,
         <div className="flex h-full flex-col">
           {/* Header with collapse button */}
           <div className="flex items-center justify-between p-6 border-b border-muted/20">
-            <div className={cn(
-              'flex items-center gap-3',
+            <Link href="/" className={cn(
+              'flex items-center gap-3 hover:scale-105 transition-all duration-200 group',
               collapsed && 'md:justify-center'
             )}>
-              <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-purple-500 to-cyan-500 flex items-center justify-center shadow-lg pulse-glow">
+              <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-purple-500 to-cyan-500 flex items-center justify-center shadow-lg pulse-glow group-hover:shadow-xl">
                 <LayoutDashboard className="h-5 w-5 text-white" />
               </div>
               {!collapsed && (
                 <div>
-                  <span className="font-black text-xl gradient-text">SecureGuard</span>
+                  <span className="font-black text-xl gradient-text group-hover:text-cyan-400 transition-colors">SecureGuard</span>
                   <p className="text-xs text-muted-foreground">Security Platform</p>
                 </div>
               )}
-            </div>
+            </Link>
 
             {/* Mobile close button */}
             <button

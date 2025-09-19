@@ -53,15 +53,15 @@ export function TopBar({ onMenuClick }: TopBarProps) {
             <Menu className="h-5 w-5" />
           </Button>
 
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-purple-500 to-cyan-500 flex items-center justify-center shadow-lg pulse-glow">
+          <Link href="/" className="flex items-center gap-3 hover:scale-105 transition-all duration-200 group">
+            <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-purple-500 to-cyan-500 flex items-center justify-center shadow-lg pulse-glow group-hover:shadow-xl">
               <Shield className="h-4 w-4 text-white" />
             </div>
             <div className="hidden sm:block">
-              <h1 className="text-xl font-black gradient-text">SecureGuard</h1>
+              <h1 className="text-xl font-black gradient-text group-hover:text-cyan-400 transition-colors">SecureGuard</h1>
               <p className="text-xs text-muted-foreground -mt-1">Security Platform</p>
             </div>
-          </div>
+          </Link>
         </div>
 
         <div className="flex items-center gap-6">
