@@ -40,6 +40,19 @@ export function TopBar({ onMenuClick }: TopBarProps) {
         .toUpperCase()
     : 'U'
 
+  const handleSignOut = async () => {
+    try {
+      await signOut({
+        callbackUrl: '/login',
+        redirect: true
+      })
+    } catch (error) {
+      console.error('Sign out error:', error)
+      // Fallback redirect in case of error
+      window.location.href = '/login'
+    }
+  }
+
   return (
     <header className="sticky top-0 z-50 w-full border-b border-muted/20 glass-card backdrop-blur-xl">
       <div className="flex h-18 items-center justify-between px-6">
@@ -151,14 +164,14 @@ export function TopBar({ onMenuClick }: TopBarProps) {
               </DropdownMenuItem>
               <DropdownMenuSeparator className="bg-muted/20" />
               <DropdownMenuItem
-                onClick={() => signOut({ callbackUrl: '/login' })}
-                className="mx-2 rounded-xl hover:bg-red-500/10 transition-all duration-200 text-red-500"
+                onClick={handleSignOut}
+                className="mx-2 rounded-xl hover:bg-red-500/10 transition-all duration-200 text-red-500 cursor-pointer"
               >
                 <div className="flex items-center gap-3 p-3 w-full">
                   <div className="p-1.5 rounded-lg bg-red-500/20">
                     <LogOut className="h-4 w-4 text-red-500" />
                   </div>
-                  <span className="font-medium">Log out</span>
+                  <span className="font-bold">SIGN OUT</span>
                 </div>
               </DropdownMenuItem>
             </DropdownMenuContent>

@@ -60,6 +60,7 @@ export const authOptions: NextAuthOptions = {
   },
   pages: {
     signIn: "/login",
+    signOut: "/login",
   },
   callbacks: {
     async signIn({ user, account, profile }) {
@@ -151,14 +152,19 @@ export const authOptions: NextAuthOptions = {
     async redirect({ url, baseUrl }) {
       // If it's a relative URL, it starts with "/". Make sure it's relative to baseUrl
       if (url.startsWith("/")) {
+        // Allow explicit redirects to login page (for sign out)
+        if (url === "/login") return `${baseUrl}/login`
         // If user is being redirected to root after sign in, send to dashboard instead
         if (url === "/") return `${baseUrl}/dashboard`
         return `${baseUrl}${url}`
       }
       // If it's the same origin as base URL, allow it
       else if (new URL(url).origin === baseUrl) {
+        const pathname = new URL(url).pathname
+        // Allow explicit redirects to login page (for sign out)
+        if (pathname === "/login") return url
         // If it's the root URL, redirect to dashboard
-        if (new URL(url).pathname === "/") return `${baseUrl}/dashboard`
+        if (pathname === "/") return `${baseUrl}/dashboard`
         return url
       }
       // Otherwise redirect to dashboard
