@@ -15,80 +15,114 @@ import {
 
 export default function DashboardPage() {
   return (
-    <div className="space-y-8 p-6">
-      <div className="relative">
+    <div className="space-y-8 p-6 particle-field cyber-grid">
+      <div className="relative scene-3d">
         <div className="absolute -top-4 -left-4 w-72 h-72 bg-gradient-to-r from-purple-400/10 to-cyan-400/10 rounded-full blur-3xl floating-animation"></div>
-        <h1 className="relative text-5xl font-black tracking-tight gradient-text mb-4">
-          Security Dashboard
+        <div className="absolute top-20 right-0 w-48 h-48 bg-gradient-to-r from-cyan-400/10 to-blue-400/10 rounded-full blur-2xl floating-animation" style={{animationDelay: '3s'}}></div>
+
+        <h1 className="relative text-6xl md:text-7xl font-black tracking-tight gradient-text mb-6 tilt-3d">
+          CYBER COMMAND
         </h1>
-        <p className="relative text-lg text-muted-foreground font-medium">
-          Welcome back! Here's your real-time security posture overview.
+        <p className="relative text-xl text-cyan-400 font-bold mb-2 holographic">
+          REAL-TIME SECURITY MATRIX
         </p>
+        <p className="relative text-lg text-muted-foreground font-medium">
+          Advanced threat detection and defense coordination systems online.
+        </p>
+
+        {/* Live Status Indicators */}
+        <div className="flex space-x-6 mt-8">
+          <div className="flex items-center space-x-2">
+            <div className="w-3 h-3 bg-green-500 rounded-full pulse-glow"></div>
+            <span className="text-green-400 font-mono text-sm">SYSTEMS ONLINE</span>
+          </div>
+          <div className="flex items-center space-x-2">
+            <div className="w-3 h-3 bg-cyan-500 rounded-full pulse-glow"></div>
+            <span className="text-cyan-400 font-mono text-sm">AI MONITORING</span>
+          </div>
+          <div className="flex items-center space-x-2">
+            <div className="w-3 h-3 bg-purple-500 rounded-full pulse-glow"></div>
+            <span className="text-purple-400 font-mono text-sm">DEFENSES ACTIVE</span>
+          </div>
+        </div>
       </div>
 
       {/* Stats Cards */}
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-        <Card className="morphism-card hover:scale-105 transition-all duration-300 group">
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
-            <CardTitle className="text-sm font-semibold text-muted-foreground">Total Scans</CardTitle>
-            <div className="p-2 rounded-xl bg-gradient-to-br from-blue-500/20 to-cyan-500/20 group-hover:from-blue-500/30 group-hover:to-cyan-500/30 transition-colors">
-              <Scan className="h-5 w-5 text-blue-500" />
+      <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4 scene-3d">
+        <Card className="neon-box bg-gradient-to-br from-blue-500/10 via-cyan-500/5 to-indigo-500/10 border-blue-500/30 hover:border-blue-400/60 card-3d group">
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-4">
+            <CardTitle className="text-sm font-bold text-cyan-400 holographic">SCAN OPERATIONS</CardTitle>
+            <div className="p-3 rounded-2xl bg-gradient-to-br from-blue-500/30 to-cyan-500/30 group-hover:from-blue-500/50 group-hover:to-cyan-500/50 transition-all duration-300 pulse-glow">
+              <Scan className="h-6 w-6 text-blue-400" />
             </div>
           </CardHeader>
           <CardContent>
-            <div className="text-3xl font-black mb-1">12</div>
-            <div className="flex items-center text-xs">
-              <TrendingUp className="h-3 w-3 text-green-500 mr-1" />
-              <span className="text-green-500 font-medium">+2</span>
-              <span className="text-muted-foreground ml-1">from last month</span>
+            <div className="text-4xl font-black mb-2 gradient-text">12</div>
+            <div className="flex items-center text-sm">
+              <TrendingUp className="h-4 w-4 text-green-400 mr-2" />
+              <span className="text-green-400 font-bold">+2</span>
+              <span className="text-gray-400 ml-2 font-mono">OPERATIONS</span>
+            </div>
+            <div className="mt-4 w-full bg-blue-500/20 rounded-full h-2">
+              <div className="bg-gradient-to-r from-blue-500 to-cyan-400 h-2 rounded-full w-3/4 data-stream"></div>
             </div>
           </CardContent>
         </Card>
 
-        <Card className="morphism-card hover:scale-105 transition-all duration-300 group">
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
-            <CardTitle className="text-sm font-semibold text-muted-foreground">Average Score</CardTitle>
-            <div className="p-2 rounded-xl bg-gradient-to-br from-emerald-500/20 to-green-500/20 group-hover:from-emerald-500/30 group-hover:to-green-500/30 transition-colors">
-              <TrendingUp className="h-5 w-5 text-emerald-500" />
+        <Card className="neon-box bg-gradient-to-br from-green-500/10 via-emerald-500/5 to-teal-500/10 border-green-500/30 hover:border-green-400/60 card-3d group">
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-4">
+            <CardTitle className="text-sm font-bold text-green-400 holographic">THREAT SCORE</CardTitle>
+            <div className="p-3 rounded-2xl bg-gradient-to-br from-green-500/30 to-emerald-500/30 group-hover:from-green-500/50 group-hover:to-emerald-500/50 transition-all duration-300 pulse-glow">
+              <TrendingUp className="h-6 w-6 text-green-400" />
             </div>
           </CardHeader>
           <CardContent>
-            <div className="text-3xl font-black mb-1">85</div>
-            <div className="flex items-center text-xs">
-              <TrendingUp className="h-3 w-3 text-green-500 mr-1" />
-              <span className="text-green-500 font-medium">+5%</span>
-              <span className="text-muted-foreground ml-1">from last month</span>
+            <div className="text-4xl font-black mb-2 text-green-400">85</div>
+            <div className="flex items-center text-sm">
+              <TrendingUp className="h-4 w-4 text-green-400 mr-2" />
+              <span className="text-green-400 font-bold">+5%</span>
+              <span className="text-gray-400 ml-2 font-mono">SECURITY</span>
+            </div>
+            <div className="mt-4 w-full bg-green-500/20 rounded-full h-2">
+              <div className="bg-gradient-to-r from-green-500 to-emerald-400 h-2 rounded-full w-5/6 data-stream"></div>
             </div>
           </CardContent>
         </Card>
 
-        <Card className="morphism-card hover:scale-105 transition-all duration-300 group">
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
-            <CardTitle className="text-sm font-semibold text-muted-foreground">Credits Remaining</CardTitle>
-            <div className="p-2 rounded-xl bg-gradient-to-br from-purple-500/20 to-pink-500/20 group-hover:from-purple-500/30 group-hover:to-pink-500/30 transition-colors">
-              <CreditCard className="h-5 w-5 text-purple-500" />
+        <Card className="neon-box bg-gradient-to-br from-purple-500/10 via-pink-500/5 to-indigo-500/10 border-purple-500/30 hover:border-purple-400/60 card-3d group">
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-4">
+            <CardTitle className="text-sm font-bold text-purple-400 holographic">CREDIT BANK</CardTitle>
+            <div className="p-3 rounded-2xl bg-gradient-to-br from-purple-500/30 to-pink-500/30 group-hover:from-purple-500/50 group-hover:to-pink-500/50 transition-all duration-300 pulse-glow">
+              <CreditCard className="h-6 w-6 text-purple-400" />
             </div>
           </CardHeader>
           <CardContent>
-            <div className="text-3xl font-black mb-1">75</div>
-            <div className="flex items-center text-xs">
-              <span className="text-muted-foreground">Out of </span>
-              <span className="text-purple-500 font-medium ml-1">100 credits</span>
+            <div className="text-4xl font-black mb-2 text-purple-400">75</div>
+            <div className="flex items-center text-sm">
+              <span className="text-gray-400 font-mono">AVAILABLE </span>
+              <span className="text-purple-400 font-bold ml-2">/ 100</span>
+            </div>
+            <div className="mt-4 w-full bg-purple-500/20 rounded-full h-2">
+              <div className="bg-gradient-to-r from-purple-500 to-pink-400 h-2 rounded-full w-3/4 data-stream"></div>
             </div>
           </CardContent>
         </Card>
 
-        <Card className="morphism-card hover:scale-105 transition-all duration-300 group">
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
-            <CardTitle className="text-sm font-semibold text-muted-foreground">Active Alerts</CardTitle>
-            <div className="p-2 rounded-xl bg-gradient-to-br from-orange-500/20 to-red-500/20 group-hover:from-orange-500/30 group-hover:to-red-500/30 transition-colors pulse-glow">
-              <AlertTriangle className="h-5 w-5 text-orange-500" />
+        <Card className="neon-box bg-gradient-to-br from-red-500/10 via-orange-500/5 to-yellow-500/10 border-red-500/30 hover:border-red-400/60 card-3d group">
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-4">
+            <CardTitle className="text-sm font-bold text-red-400 holographic">THREAT ALERTS</CardTitle>
+            <div className="p-3 rounded-2xl bg-gradient-to-br from-red-500/30 to-orange-500/30 group-hover:from-red-500/50 group-hover:to-orange-500/50 transition-all duration-300 pulse-glow">
+              <AlertTriangle className="h-6 w-6 text-red-400" />
             </div>
           </CardHeader>
           <CardContent>
-            <div className="text-3xl font-black mb-1">3</div>
-            <div className="flex items-center text-xs">
-              <span className="text-red-500 font-medium">2 high priority</span>
+            <div className="text-4xl font-black mb-2 text-red-400">3</div>
+            <div className="flex items-center text-sm">
+              <span className="text-red-400 font-bold">2 CRITICAL</span>
+              <span className="text-gray-400 ml-2 font-mono">THREATS</span>
+            </div>
+            <div className="mt-4 w-full bg-red-500/20 rounded-full h-2">
+              <div className="bg-gradient-to-r from-red-500 to-orange-400 h-2 rounded-full w-1/4 data-stream pulse-glow"></div>
             </div>
           </CardContent>
         </Card>
