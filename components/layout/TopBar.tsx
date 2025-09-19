@@ -40,41 +40,22 @@ export function TopBar({ onMenuClick }: TopBarProps) {
         .toUpperCase()
     : 'U'
 
-  const handleSignOut = async () => {
+  const handleSignOut = async (e: React.MouseEvent) => {
+    e.preventDefault()
+    e.stopPropagation()
+
+    console.log('Sign out clicked from dropdown')
+
     try {
-      console.log('Starting sign out process...')
-
-      // First attempt with NextAuth signOut
-      const result = await signOut({
+      // Simple, direct approach
+      await signOut({
         callbackUrl: '/login',
-        redirect: false // Don't auto-redirect, we'll handle it manually
+        redirect: true
       })
-
-      console.log('SignOut result:', result)
-
-      // Clear any local storage or session storage
-      if (typeof window !== 'undefined') {
-        localStorage.clear()
-        sessionStorage.clear()
-      }
-
-      // Force redirect to login
-      window.location.href = '/login'
-
     } catch (error) {
       console.error('Sign out error:', error)
-
-      // Aggressive fallback: clear everything and redirect
-      if (typeof window !== 'undefined') {
-        localStorage.clear()
-        sessionStorage.clear()
-        document.cookie.split(";").forEach((c) => {
-          const eqPos = c.indexOf("=")
-          const name = eqPos > -1 ? c.substr(0, eqPos) : c
-          document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/"
-        })
-        window.location.href = '/login'
-      }
+      // Fallback
+      window.location.href = '/login'
     }
   }
 
@@ -132,7 +113,11 @@ export function TopBar({ onMenuClick }: TopBarProps) {
 
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="ghost" className="relative h-10 w-10 rounded-2xl ring-2 ring-purple-500/20 hover:ring-purple-500/40 transition-all duration-200">
+              <Button
+                variant="ghost"
+                className="relative h-10 w-10 rounded-2xl ring-2 ring-purple-500/20 hover:ring-purple-500/40 transition-all duration-200"
+                onClick={() => console.log('Avatar clicked!')}
+              >
                 <Avatar className="h-10 w-10">
                   <AvatarImage src={session?.user?.image || ''} alt={session?.user?.name || ''} />
                   <AvatarFallback className="bg-gradient-to-br from-purple-500 to-cyan-500 text-white font-bold">
@@ -141,7 +126,7 @@ export function TopBar({ onMenuClick }: TopBarProps) {
                 </Avatar>
               </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent className="w-64 glass-card border-muted/20 shadow-xl" align="end" forceMount>
+            <DropdownMenuContent className="w-64 glass-card border-muted/20 shadow-xl" align="end">
               <DropdownMenuLabel className="font-normal p-4">
                 <div className="flex flex-col space-y-2">
                   <p className="text-sm font-bold leading-none">
