@@ -263,6 +263,194 @@
       inset 0 2px 4px rgba(255, 255, 255, 0.1);
   }
 
+  /* Advanced 3D Effects */
+  .scene-3d {
+    perspective: 1000px;
+    perspective-origin: center center;
+  }
+
+  .card-3d {
+    transform-style: preserve-3d;
+    transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+
+  .card-3d:hover {
+    transform: rotateY(15deg) rotateX(5deg) translateZ(50px);
+  }
+
+  .holographic {
+    background: linear-gradient(
+      45deg,
+      rgba(255, 0, 255, 0.1) 0%,
+      rgba(0, 255, 255, 0.1) 25%,
+      rgba(255, 255, 0, 0.1) 50%,
+      rgba(255, 0, 255, 0.1) 75%,
+      rgba(0, 255, 255, 0.1) 100%
+    );
+    background-size: 400% 400%;
+    animation: holographic-shift 4s ease-in-out infinite;
+    position: relative;
+  }
+
+  .holographic::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      135deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.1) 25%,
+      transparent 50%,
+      rgba(255, 255, 255, 0.1) 75%,
+      transparent 100%
+    );
+    animation: holographic-sweep 3s linear infinite;
+  }
+
+  @keyframes holographic-shift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+
+  @keyframes holographic-sweep {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+  }
+
+  .cyber-grid {
+    background-image:
+      linear-gradient(rgba(139, 92, 246, 0.1) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(139, 92, 246, 0.1) 1px, transparent 1px);
+    background-size: 50px 50px;
+    animation: grid-move 20s linear infinite;
+  }
+
+  @keyframes grid-move {
+    0% { background-position: 0 0; }
+    100% { background-position: 50px 50px; }
+  }
+
+  .particle-field {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .particle-field::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: radial-gradient(2px 2px at 20px 30px, rgba(139, 92, 246, 0.8), transparent),
+                      radial-gradient(2px 2px at 40px 70px, rgba(59, 130, 246, 0.8), transparent),
+                      radial-gradient(1px 1px at 90px 40px, rgba(168, 85, 247, 0.8), transparent),
+                      radial-gradient(1px 1px at 130px 80px, rgba(14, 165, 233, 0.8), transparent),
+                      radial-gradient(2px 2px at 160px 30px, rgba(139, 92, 246, 0.8), transparent);
+    background-repeat: repeat;
+    background-size: 200px 100px;
+    animation: particle-float 15s linear infinite;
+  }
+
+  @keyframes particle-float {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(-200px, -100px); }
+  }
+
+  .neon-box {
+    border: 2px solid transparent;
+    background: linear-gradient(45deg,
+      rgba(139, 92, 246, 0.1),
+      rgba(59, 130, 246, 0.1),
+      rgba(168, 85, 247, 0.1)
+    ) padding-box,
+    linear-gradient(45deg,
+      #8b5cf6,
+      #3b82f6,
+      #a855f7,
+      #06b6d4
+    ) border-box;
+    border-radius: 1rem;
+    position: relative;
+    box-shadow:
+      0 0 20px rgba(139, 92, 246, 0.3),
+      inset 0 0 20px rgba(139, 92, 246, 0.1);
+  }
+
+  .neon-box::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    background: linear-gradient(45deg, #8b5cf6, #3b82f6, #a855f7, #06b6d4);
+    border-radius: inherit;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: -1;
+    animation: neon-pulse 2s ease-in-out infinite alternate;
+  }
+
+  .neon-box:hover::before {
+    opacity: 0.8;
+  }
+
+  @keyframes neon-pulse {
+    0% { filter: brightness(1) saturate(1); }
+    100% { filter: brightness(1.2) saturate(1.3); }
+  }
+
+  .matrix-rain {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .matrix-rain::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+      transparent 0%,
+      rgba(0, 255, 0, 0.03) 20%,
+      rgba(0, 255, 0, 0.1) 50%,
+      rgba(0, 255, 0, 0.03) 80%,
+      transparent 100%
+    );
+    background-size: 100% 200px;
+    animation: matrix-fall 3s linear infinite;
+  }
+
+  @keyframes matrix-fall {
+    0% { transform: translateY(-200px); }
+    100% { transform: translateY(100vh); }
+  }
+
+  .data-stream {
+    position: relative;
+    background: linear-gradient(90deg,
+      transparent,
+      rgba(0, 255, 255, 0.1),
+      transparent
+    );
+    background-size: 200% 100%;
+    animation: data-flow 2s linear infinite;
+  }
+
+  @keyframes data-flow {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+
+  .tilt-3d {
+    transform-style: preserve-3d;
+    transition: transform 0.3s ease-out;
+  }
+
+  .tilt-3d:hover {
+    transform: perspective(1000px) rotateX(10deg) rotateY(10deg) translateZ(20px);
+  }
+
   /* Remove default form element styling */
   input,
   textarea,
