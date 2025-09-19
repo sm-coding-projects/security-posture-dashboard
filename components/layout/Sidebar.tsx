@@ -189,7 +189,7 @@ export function Sidebar({ className, isOpen = false, onClose, collapsed = false,
           {/* Help & Support */}
           <div className="border-t border-muted/20 p-6">
             <Link
-              href="/help"
+              href="/dashboard"
               className={cn(
                 'group flex items-center gap-4 px-4 py-3 rounded-2xl text-sm font-semibold transition-all duration-300',
                 'text-muted-foreground hover:text-foreground hover:bg-muted/30 hover:scale-105 hover:-translate-y-0.5',
